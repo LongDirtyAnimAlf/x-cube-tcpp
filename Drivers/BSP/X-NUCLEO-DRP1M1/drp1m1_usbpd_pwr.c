@@ -220,6 +220,12 @@ int32_t BSP_USBPD_PWR_Init(uint32_t PortNum)
           /* Enable component */
           TCPP0203_PORT0_ENABLE_GPIO_SET();
 
+          PWR_TCPP0203_Configure_ADC();
+          PWR_TCPP0203_Activate_ADC();
+
+          /*  Start Conversion */
+          LL_ADC_REG_StartConversion(VISENSE_ADC_INSTANCE);
+
           /* Initialize required BUS for communication */
           ret = PWR_TCPP0203_BUSConfigInit(PortNum, USBPD_PWR_Port_Configs[PortNum].Address);
           break;
@@ -526,11 +532,11 @@ int32_t BSP_USBPD_PWR_VBUSInit(uint32_t PortNum)
         /* Switch to Normal mode */
         ret = BSP_USBPD_PWR_SetPowerMode(PortNum, USBPD_PWR_MODE_NORMAL);
 
-        PWR_TCPP0203_Configure_ADC();
-        PWR_TCPP0203_Activate_ADC();
+        //PWR_TCPP0203_Configure_ADC();
+        //PWR_TCPP0203_Activate_ADC();
 
         /*  Start Conversion */
-        LL_ADC_REG_StartConversion(VISENSE_ADC_INSTANCE);
+        //LL_ADC_REG_StartConversion(VISENSE_ADC_INSTANCE);
         break;
 
       case USBPD_PWR_HW_CONFIG_TYPE_DEFAULT:
